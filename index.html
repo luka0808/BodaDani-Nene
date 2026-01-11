@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Invitación de boda - Nene & Dani</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Montserrat:wght@300;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ========== VARIABLES GLOBALES ========== */
+    :root {
+      --color-fondo: #f7f4ef;
+      --color-principal: #b08a5a;
+      --color-principal-dark: #997349;
+      --color-secundario: #333333;
+      --color-texto: #444444;
+      --color-blanco: #ffffff;
+      --nav-height: 70px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-padding-top: var(--nav-height); }
+
+    body {
+      font-family: "Montserrat", system-ui, sans-serif;
+      background-color: var(--color-fondo);
+      color: var(--color-texto);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; transition: opacity 0.3s; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* ===== HERO / PORTADA ===== */
+    header.hero {
+      position: relative;
+      height: 100vh;
+      height: 100dvh; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--color-blanco);
+      background-image:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+        url("Fotos/Portada.jpeg"); 
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 50% 35%; 
+    }
+
+    .hero-content { padding: 2rem; max-width: 800px; width: 100%; margin-top: 3rem; }
+    .text-shadow { text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+
+    .hero-subtitle {
+      font-family: "Allura", cursive;
+      font-size: clamp(2rem, 5vw, 3.5rem); 
+      margin-bottom: 0.5rem;
+      opacity: 0.95;
+      line-height: 1.2;
+      font-weight: 400;
+    }
+
+    .hero-title {
+      font-family: "Allura", cursive;
+      font-size: clamp(4rem, 12vw, 7.5rem); 
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-date {
+      font-family: "Allura", cursive;
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-top: 0.5rem;
+      font-weight: 300;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav.navbar {
+      position: fixed; top: 0; width: 100%; height: var(--nav-height);
+      background: rgba(247,244,239, 0.95);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      z-index: 1000; border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex; align-items: center;
+    }
+    .nav-container {
+      width: 100%; max-width: 960px; margin: 0 auto; padding: 0 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo { font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-secundario); }
+    .nav-menu { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+    .nav-link { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; padding: 0.5rem; font-weight: 500; color: var(--color-texto); }
+    .nav-link:hover { color: var(--color-principal); }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+    .bar { height: 2px; width: 24px; background: var(--color-secundario); transition: all 0.3s ease; }
+
+    /* ===== ESTILO WINAMP "ELEGANTE" ===== */
+    .winamp-btn {
+        background: transparent; /* Fondo transparente */
+        border: 1px solid var(--color-principal); /* Borde del color de la boda */
+        border-radius: 4px;
+        width: 40px;
+        height: 30px;
+        cursor: pointer;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 3px;
+        padding: 3px;
+        margin-left: 5px;
+        transition: all 0.3s ease;
+    }
+
+    .winamp-btn:hover {
+        background: rgba(176, 138, 90, 0.1); /* Brillo suave al pasar mouse */
+        transform: scale(1.05);
+    }
+
+    .wa-bar {
+        width: 4px;
+        height: 20%;
+        background-color: var(--color-principal); /* Barritas color dorado/tierra */
+        border-radius: 2px;
+        transition: height 0.1s;
+    }
+
+    .winamp-btn.playing .wa-bar {
+        animation: equalize 0.5s infinite alternate;
+        opacity: 0.9;
+    }
+
+    .winamp-btn.playing .wa-bar:nth-child(1) { animation-duration: 0.4s; }
+    .winamp-btn.playing .wa-bar:nth-child(2) { animation-duration: 0.45s; }
+    .winamp-btn.playing .wa-bar:nth-child(3) { animation-duration: 0.35s; }
+    .winamp-btn.playing .wa-bar:nth-child(4) { animation-duration: 0.5s; }
+    .winamp-btn.playing .wa-bar:nth-child(5) { animation-duration: 0.3s; }
+
+    @keyframes equalize {
+        0% { height: 15%; }
+        50% { height: 50%; }
+        100% { height: 90%; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-toggle { display: flex; }
+      .nav-menu {
+        position: absolute; top: var(--nav-height); left: 0; width: 100%; height: 0;
+        overflow: hidden; flex-direction: column; background: var(--color-fondo);
+        text-align: center; gap: 0; transition: height 0.4s ease; box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+      }
+      .nav-menu.show { height: 320px; padding: 1rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+      .nav-link { display: block; padding: 1rem; font-size: 0.9rem; }
+      .winamp-btn { margin: 10px auto; }
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    main { max-width: 960px; margin: 0 auto; padding: 4rem 1.2rem; }
+    section { margin-bottom: 4rem; }
+    .section-title { text-align: center; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem; color: var(--color-principal); margin-bottom: 0.5rem; font-weight: 600; }
+    .section-subtitle { text-align: center; font-family: "Allura", cursive; font-size: 2.5rem; margin-bottom: 2rem; color: var(--color-secundario); line-height: 1.2; }
+    .story { max-width: 700px; margin: 0 auto; text-align: center; font-size: 1.05rem; }
+    .story p + p { margin-top: 1.2rem; }
+
+    /* GRID */
+    .grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+    @media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
+    
+    .card {
+      background-color: var(--color-blanco); border-radius: 1rem; padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: transform 0.3s;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .card:hover { transform: translateY(-5px); }
+    .card-title { font-family: "Allura", cursive; font-size: 2rem; margin-bottom: 1rem; color: var(--color-principal); }
+    .details-list { list-style: none; text-align: center; margin-bottom: 1.5rem; flex-grow: 1; }
+    .details-list li { margin-bottom: 0.8rem; font-size: 0.95rem; }
+
+    /* BOTONES */
+    .btn-small { display: inline-flex; align-items: center; gap: 5px; padding: 0.5rem 1.2rem; border: 1px solid var(--color-principal); border-radius: 20px; font-size: 0.75rem; text-transform: uppercase; font-weight: 600; color: var(--color-principal); transition: all 0.3s ease; }
+    .btn-small:hover { background-color: var(--color-principal); color: #fff; }
+    .btn { display: inline-flex; justify-content: center; align-items: center; min-width: 140px; padding: 0.9rem 2rem; background-color: var(--color-principal); color: var(--color-blanco); border-radius: 50px; text-transform: uppercase; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; transition: all 0.3s ease; cursor: pointer; }
+    .btn:hover { background-color: var(--color-principal-dark); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(176, 138, 90, 0.4); }
+    .btn-secondary { background: transparent; border: 1px solid var(--color-principal); color: var(--color-principal); }
+    .btn-secondary:hover { background: var(--color-principal); color: #fff; }
+    
+    .rsvp-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+    
+    .countdown { margin: 2.5rem auto 0 auto; text-align: center; font-size: 1.1rem; font-weight: 500; color: var(--color-principal); background: #fff; padding: 1rem; border-radius: 10px; display: block; width: 100%; max-width: 400px; }
+
+    /* ===== CARRUSEL ===== */
+    .carousel-container { position: relative; width: 100%; overflow: hidden; padding: 10px 0; }
+    .carousel-track { display: flex; transition: transform 0.5s ease-in-out; gap: 15px; }
+    .carousel-item { min-width: 100%; border-radius: 10px; overflow: hidden; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    .carousel-item img { width: 100%; height: 350px; object-fit: cover; display: block; transition: transform 0.3s; }
+    .carousel-item:hover img { transform: scale(1.03); }
+    @media (min-width: 768px) { .carousel-item { min-width: calc(33.333% - 10px); } }
+    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(255, 255, 255, 0.7); border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 10; color: var(--color-principal); font-size: 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
+    .carousel-btn:hover { background-color: #fff; }
+
+    /* ===== MODAL ===== */
+    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
+    .modal-content { max-width: 90%; max-height: 90vh; border-radius: 5px; box-shadow: 0 0 20px rgba(255,255,255,0.1); }
+    .close-modal { position: absolute; top: 20px; right: 30px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 2001; }
+
+    footer { text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: #888; background-color: rgba(0,0,0,0.02); margin-top: 2rem; }
+  </style>
+</head>
+
+<body>
+
+  <audio id="musica" loop>
+    <source src="Musica/Ed%20Sheeran%20-%20Perfect%20.mp3" type="audio/mpeg">
+  </audio>
+  
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">Nene & Dani</div>
+      <div class="nav-toggle" id="mobile-menu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="#inicio" class="nav-link" onclick="cerrarMenu()">Inicio</a></li>
+        <li><a href="#historia" class="nav-link" onclick="cerrarMenu()">Historia</a></li>
+        <li><a href="#detalles" class="nav-link" onclick="cerrarMenu()">Detalles</a></li>
+        <li><a href="#galeria" class="nav-link" onclick="cerrarMenu()">Galería</a></li>
+        <li><a href="#rsvp" class="nav-link" onclick="cerrarMenu()">RSVP</a></li>
+        
+        <li>
+            <button class="winamp-btn" id="btnMusic" onclick="toggleMusic()" title="Play Música">
+                <div class="wa-bar"></div>
+                <div class="wa-bar"></div>
+                <div class="wa-bar"></div>
+                <div class="wa-bar"></div>
+                <div class="wa-bar"></div>
+            </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero" id="inicio">
+    <div class="hero-content">
+      <div class="hero-subtitle text-shadow">Estás invitado a nuestra boda</div>
+      <h1 class="hero-title text-shadow">Nene & Dani</h1>
+      <div class="hero-date text-shadow">11 · 04 · 2026</div>
+    </div>
+  </header>
+
+  <main>
+    <section id="historia">
+      <div class="section-title">Nuestra historia</div>
+      <div class="section-subtitle">Cómo empezó todo</div>
+      <div class="story">
+        <p> Todo comenzó casi sin darnos cuenta. Nos encontramos cuando no lo estábamos buscando, y una tarde cualquiera se transformó en el inicio de una historia especial. Entre risas compartidas, aprendizajes y amor, fuimos construyendo el camino que hoy nos une y nos invita a dar el sí más importante de nuestras vidas. </p>
+        <p> Este día es muy importante para nosotros, y nada nos haría más felices que tenerte presente para celebrar nuestro amor. </p>
+      </div>
+    </section>
+
+    <section id="detalles">
+      <div class="section-title">Detalles</div>
+      <div class="section-subtitle">Ceremonia & Fiesta</div>
+      
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 class="card-title">Ceremonia</h3>
+          <ul class="details-list">
+            <li>📅 <strong>11 de Abril de 2026</strong></li>
+            <li>⏰ <strong>18:00 hs</strong></li>
+            <li>📍 <strong>Iglesia</strong></li>
+            <li>⛪ <strong>Parroquia Ejemplo</strong></li>
+          </ul>
+          <a href="https://www.google.com/maps/search/?api=1&query=Circulo+Medico+Quilmes+Av+Mitre+4625" target="_blank" class="btn-small">📍 Ver Ubicación</a>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">Fiesta</h3>
+          <ul class="details-list">
+            <li>📅 <strong>11 de Abril de 2026</strong></li>
+            <li>🌙 <strong>20:00 hs</strong></li>
+            <li>📍 <strong>Círculo Médico Quilmes</strong></li>
+            <li>🗺️ <strong>Av. Mitre 4625, Ezpeleta</strong></li>
+          </ul>
+          <a href="https://www.google.com/maps/search/?api=1&query=Circulo+Medico+Quilmes+Av+Mitre+4625" target="_blank" class="btn-small">📍 Ver Ubicación</a>
+        </div>
+      </div>
+      
+      <div class="countdown" id="contador">Cargando...</div>
+    </section>
+
+    <section id="galeria">
+      <div class="section-title">Recuerdos</div>
+      <div class="section-subtitle">Nuestros momentos</div>
+      
+      <div class="carousel-container">
+        <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
+        <div class="carousel-track" id="track">
+          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (1).jpeg" alt="Foto"></div>
+          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (2).jpeg" alt="Foto"></div>
+          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (3).jpeg" alt="Foto"></div>
+          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (4).jpeg" alt="Foto"></div>
+          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (5).jpeg" alt="Foto"></div>
+          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (6).jpeg" alt="Foto"></div>
+          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (7).jpeg" alt="Foto"></div>
+          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (8).jpeg" alt="Foto"></div>
+          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (9).jpeg" alt="Foto"></div>
+          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (10).jpeg" alt="Foto"></div>
+          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (11).jpeg" alt="Foto"></div>
+          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (12).jpeg" alt="Foto"></div>
+        </div>
+        <button class="carousel-btn next" onclick="moveSlide(1)">❯</button>
+      </div>
+    </section>
+
+    <section id="rsvp">
+      <div class="section-title">Confirmación</div>
+      <div class="section-subtitle">¡Te esperamos!</div>
+      <div style="text-align: center;">
+        <p>Por favor confirmá tu asistencia antes del <br><strong>4 de Abril de 2026</strong></p>
+      </div>
+      <div class="rsvp-actions">
+        <a class="btn" href="https://wa.me/5491112345678?text=Hola!%20Confirmo%20mi%20asistencia%20a%20la%20boda" target="_blank">
+            Confirmar WhatsApp
+        </a>
+        <a class="btn-secondary btn" href="mailto:invitacion@example.com">
+            Enviar Email
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p> © 2026 Nene & Dani </p>
+  </footer>
+
+  <div id="myModal" class="modal" onclick="closeModal()">
+    <span class="close-modal">×</span>
+    <img class="modal-content" id="img01">
+  </div>
+
+  <script>
+    // MENU RESPONSIVE
+    const toggle = document.getElementById("mobile-menu");
+    const menu = document.querySelector(".nav-menu");
+    toggle.addEventListener("click", () => { menu.classList.toggle("show"); });
+    function cerrarMenu() { if(window.innerWidth <= 768) { menu.classList.remove("show"); } }
+
+    // CONTADOR
+    const fechaBoda = new Date("2026-04-11T18:00:00"); 
+    function actualizarContador() {
+      const ahora = new Date();
+      const diff = fechaBoda - ahora;
+      const cont = document.getElementById("contador");
+      if (diff <= 0) { cont.textContent = "¡Hoy es el gran día! 💍"; return; }
+      const dias = Math.floor(diff / (1000*60*60*24));
+      const hrs = Math.floor((diff / (1000*60*60)) % 24);
+      const min = Math.floor((diff / (1000*60)) % 60);
+      const seg = Math.floor((diff / 1000) % 60);
+      cont.innerHTML = `Faltan <strong>${dias}d ${hrs}h ${min}m ${seg}s</strong>`;
+    }
+    actualizarContador(); setInterval(actualizarContador, 1000); 
+
+    // CARRUSEL
+    let index = 0;
+    const track = document.getElementById('track');
+    const items = document.querySelectorAll('.carousel-item');
+    const totalItems = items.length;
+    function getVisibleItems() { return window.innerWidth >= 768 ? 3 : 1; }
+    function moveSlide(direction) {
+        const visibleItems = getVisibleItems();
+        const maxIndex = totalItems - visibleItems;
+        index += direction;
+        if (index < 0) { index = maxIndex; }
+        if (index > maxIndex) { index = 0; }
+        const movePercent = index * (100 / visibleItems);
+        const gapAdjustment = window.innerWidth >= 768 ? (index * 1.5) : 0; 
+        track.style.transform = `translateX(calc(-${movePercent}% - ${gapAdjustment}px))`;
+    }
+    let autoPlay = setInterval(() => moveSlide(1), 3000);
+    const carouselContainer = document.querySelector('.carousel-container');
+    carouselContainer.addEventListener('mouseenter', () => clearInterval(autoPlay));
+    carouselContainer.addEventListener('mouseleave', () => autoPlay = setInterval(() => moveSlide(1), 3000));
+    window.addEventListener('resize', () => moveSlide(0));
+
+    // MODAL
+    const modal = document.getElementById("myModal");
+    const modalImg = document.getElementById("img01");
+    function openModal(element) {
+        const img = element.querySelector('img');
+        modal.style.display = "flex";
+        modalImg.src = img.src;
+    }
+    function closeModal() { modal.style.display = "none"; }
+
+    // MÚSICA
+    const audio = document.getElementById("musica");
+    const musicBtn = document.getElementById("btnMusic");
+    let isPlaying = false;
+
+    function toggleMusic() {
+        if (isPlaying) {
+            audio.pause();
+            musicBtn.classList.remove("playing");
+        } else {
+            audio.play();
+            musicBtn.classList.add("playing");
+        }
+        isPlaying = !isPlaying;
+    }
+  </script>
+
+</body>
+</html>
