@@ -33,7 +33,7 @@
       font-family: "Montserrat", system-ui, sans-serif;
       background-color: var(--color-fondo);
       color: var(--color-texto);
-      line-height: 1.8; /* Un poco más de aire en el texto */
+      line-height: 1.8;
       scroll-behavior: smooth;
       overflow-x: hidden;
     }
@@ -61,7 +61,7 @@
     }
 
     .hero-content { padding: 2rem; max-width: 800px; width: 100%; margin-top: 3rem; }
-    .text-shadow { text-shadow: 0 4px 15px rgba(0,0,0,0.6); } /* Sombra un poco más difusa */
+    .text-shadow { text-shadow: 0 4px 15px rgba(0,0,0,0.6); }
 
     .hero-subtitle {
       font-family: "Allura", cursive;
@@ -92,7 +92,7 @@
       background: rgba(247,244,239, 0.95);
       backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
       z-index: 1001;
-      border-bottom: 1px solid rgba(176, 138, 90, 0.1); /* Borde sutil dorado */
+      border-bottom: 1px solid rgba(176, 138, 90, 0.1);
       display: flex; align-items: center;
       box-shadow: 0 4px 20px rgba(0,0,0,0.03);
     }
@@ -152,7 +152,7 @@
 
     /* ===== MAIN CONTENT ===== */
     main { max-width: 960px; margin: 0 auto; padding: 4rem 1.2rem; }
-    section { margin-bottom: 5rem; } /* Más separación entre secciones */
+    section { margin-bottom: 5rem; } 
     
     .section-title { 
         text-align: center; text-transform: uppercase; letter-spacing: 0.25em; 
@@ -166,7 +166,6 @@
         position: relative;
     }
     
-    /* Línea decorativa debajo de los subtítulos */
     .section-subtitle::after {
         content: ""; display: block; width: 50px; height: 2px;
         background-color: var(--color-principal); margin: 10px auto 0 auto;
@@ -176,13 +175,12 @@
     .story { max-width: 700px; margin: 0 auto; text-align: center; font-size: 1.1rem; color: #555; }
     .story p + p { margin-top: 1.5rem; }
 
-    /* GRID & CARDS - MEJORADAS */
+    /* GRID & CARDS */
     .grid { display: grid; gap: 2rem; grid-template-columns: 1fr; }
     @media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
     
     .card {
       background-color: var(--color-blanco); border-radius: 1rem; padding: 2.5rem 2rem;
-      /* Sombra dorada suave en lugar de negra */
       box-shadow: 0 15px 40px rgba(176, 138, 90, 0.15); 
       border: 1px solid rgba(176, 138, 90, 0.1);
       text-align: center; transition: transform 0.3s, box-shadow 0.3s;
@@ -217,7 +215,7 @@
     .btn:hover { 
         background-color: var(--color-principal-dark); 
         transform: translateY(-3px); 
-        box-shadow: 0 10px 25px rgba(176, 138, 90, 0.5); /* Glow effect */
+        box-shadow: 0 10px 25px rgba(176, 138, 90, 0.5);
     }
     
     .btn-secondary { background: transparent; border: 1px solid var(--color-principal); color: var(--color-principal); }
@@ -234,7 +232,6 @@
         background: #fff;
         padding: 2.5rem 1rem;
         border-radius: 15px;
-        /* Sombra suave */
         box-shadow: 0 15px 40px rgba(176, 138, 90, 0.1);
         border: 1px solid rgba(176, 138, 90, 0.1);
     }
@@ -315,9 +312,9 @@
     .carousel-btn.next { right: 10px; }
     .carousel-btn:hover { background-color: var(--color-principal); color: #fff; }
 
-    /* ===== REGALOS ===== */
+    /* ===== REGALOS (COLOR MÁS CLARITO APLICADO) ===== */
     .gift-card {
-        background: linear-gradient(135deg, var(--color-principal) 0%, var(--color-principal-dark) 100%);
+        background-color: #c7b299; /* Marrón más suave/claro */
         color: white;
         padding: 4rem 2rem;
         border-radius: 1.5rem;
@@ -359,8 +356,6 @@
     .modal-next { right: 20px; }
 
     footer { text-align: center; padding: 3rem 1rem; font-size: 0.85rem; color: #999; background-color: #fcfbf9; margin-top: 4rem; border-top: 1px solid rgba(0,0,0,0.03); }
-
-    /* EL MARCO DECORATIVO HA SIDO ELIMINADO */
   </style>
 </head>
 
@@ -422,6 +417,7 @@
             <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (2).jpeg" alt="Foto"></div>
             <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (3).jpeg" alt="Foto"></div>
             <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (4).jpeg" alt="Foto"></div>
+            <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (5).jpeg" alt="Foto"></div>
             <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (6).jpeg" alt="Foto"></div>
             <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (7).jpeg" alt="Foto"></div>
             <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (8).jpeg" alt="Foto"></div>
@@ -527,11 +523,11 @@
             
             <p style="margin-bottom: 5px;"><strong>Enviar comprobante:</strong></p>
             
-            <a href="https://wa.me/5491158779553?text=Hola!%20Acá%20te%20envío%20el%20comprobante%20del%20regalo" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: #25D366; font-weight: 600; text-decoration: none; font-size: 1rem;">
+            <a href="https://wa.me/5491158779553?text=Hola!%20Acá%20te%20envío%20el%20comprobante%20del%20regalo" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: #25D366; font-weight: 600; text-decoration: none; font-size: 1.1rem;">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                 </svg>
-                +54 9 11 5877-9553 (Tocar aquí)
+                WhatsApp
             </a>
         </div>
 
