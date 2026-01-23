@@ -53,6 +53,9 @@
       
       /* --- LA SOLUCIÓN INICIO (Ajuste Foco Caras) --- */
       background-position: 50% 15%; 
+      
+      /* IMPORTANTE: z-index mayor que el marco decorativo (999) para taparlo */
+      z-index: 1000; 
     }
 
     .hero-content { padding: 2rem; max-width: 800px; width: 100%; margin-top: 3rem; }
@@ -86,7 +89,8 @@
       position: fixed; top: 0; width: 100%; height: var(--nav-height);
       background: rgba(247,244,239, 0.95);
       backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-      z-index: 1000; border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      z-index: 1001; /* Mayor que hero y marco */
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
       display: flex; align-items: center;
     }
     .nav-container {
@@ -100,7 +104,7 @@
     .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
     .bar { height: 2px; width: 24px; background: var(--color-secundario); transition: all 0.3s ease; }
 
-    /* ===== ESTILO WINAMP "ELEGANTE" (Play vs Barras) ===== */
+    /* ===== ESTILO WINAMP "ELEGANTE" ===== */
     .winamp-btn {
         background: transparent;
         border: 1px solid var(--color-principal);
@@ -109,107 +113,37 @@
         height: 30px;
         cursor: pointer;
         display: flex;
-        align-items: center; /* Centrar contenido */
-        justify-content: center;
-        padding: 3px;
-        margin-left: 5px;
+        align-items: center; justify-content: center;
+        padding: 3px; margin-left: 5px;
         transition: all 0.3s ease;
         position: relative;
     }
-
-    .winamp-btn:hover {
-        background: rgba(176, 138, 90, 0.1);
-        transform: scale(1.05);
-    }
-
-    /* --- ESTADO 1: PLAY ICON --- */
-    .play-icon {
-        font-size: 14px;
-        color: var(--color-principal);
-        display: block; /* Visible por defecto */
-    }
-
-    /* --- ESTADO 2: BARRITAS --- */
-    .equalizer-container {
-        display: none; /* Oculto por defecto */
-        align-items: flex-end;
-        justify-content: center;
-        gap: 3px;
-        height: 100%;
-        width: 100%;
-    }
-
-    .wa-bar {
-        width: 4px;
-        height: 20%;
-        background-color: var(--color-principal);
-        border-radius: 2px;
-        transition: height 0.1s;
-    }
-
-    /* CUANDO SUENA LA MÚSICA (.playing) */
-    .winamp-btn.playing .play-icon {
-        display: none; /* Oculta Play */
-    }
-    
-    .winamp-btn.playing .equalizer-container {
-        display: flex; /* Muestra Barritas */
-    }
-
-    .winamp-btn.playing .wa-bar {
-        animation: equalize 0.5s infinite alternate;
-        opacity: 0.9;
-    }
-
-    /* Ritmo de animación */
+    .winamp-btn:hover { background: rgba(176, 138, 90, 0.1); transform: scale(1.05); }
+    .play-icon { font-size: 14px; color: var(--color-principal); display: block; }
+    .equalizer-container { display: none; align-items: flex-end; justify-content: center; gap: 3px; height: 100%; width: 100%; }
+    .wa-bar { width: 4px; height: 20%; background-color: var(--color-principal); border-radius: 2px; transition: height 0.1s; }
+    .winamp-btn.playing .play-icon { display: none; }
+    .winamp-btn.playing .equalizer-container { display: flex; }
+    .winamp-btn.playing .wa-bar { animation: equalize 0.5s infinite alternate; opacity: 0.9; }
     .winamp-btn.playing .wa-bar:nth-child(1) { animation-duration: 0.4s; }
     .winamp-btn.playing .wa-bar:nth-child(2) { animation-duration: 0.45s; }
     .winamp-btn.playing .wa-bar:nth-child(3) { animation-duration: 0.35s; }
     .winamp-btn.playing .wa-bar:nth-child(4) { animation-duration: 0.5s; }
     .winamp-btn.playing .wa-bar:nth-child(5) { animation-duration: 0.3s; }
-
-    @keyframes equalize {
-        0% { height: 15%; }
-        50% { height: 50%; }
-        100% { height: 90%; }
-    }
+    @keyframes equalize { 0% { height: 15%; } 50% { height: 50%; } 100% { height: 90%; } }
 
     /* RESPONSIVE NAVBAR (Móvil) CORREGIDO */
     @media (max-width: 768px) {
       .nav-toggle { display: flex; }
-      
       .nav-menu {
-        position: absolute;
-        top: var(--nav-height);
-        left: 0;
-        width: 100%;
-        
-        /* CORRECCIÓN: Usamos max-height para evitar cortes */
+        position: absolute; top: var(--nav-height); left: 0; width: 100%;
         max-height: 0; 
-        
-        overflow: hidden;
-        flex-direction: column;
-        background: var(--color-fondo);
-        text-align: center;
-        gap: 0;
-        
-        /* Transición suave */
-        transition: max-height 0.5s ease-in-out, box-shadow 0.3s ease;
-        box-shadow: none;
+        overflow: hidden; flex-direction: column; background: var(--color-fondo);
+        text-align: center; gap: 0;
+        transition: max-height 0.5s ease-in-out, box-shadow 0.3s ease; box-shadow: none;
       }
-
-      .nav-menu.show {
-        /* Altura suficiente para todo el contenido */
-        max-height: 600px; 
-        
-        padding: 1rem 0 2rem 0; /* Espacio extra abajo */
-        border-bottom: 1px solid rgba(0,0,0,0.05);
-        box-shadow: 0 10px 15px rgba(0,0,0,0.05);
-      }
-
+      .nav-menu.show { max-height: 600px; padding: 1rem 0 2rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 15px rgba(0,0,0,0.05); }
       .nav-link { display: block; padding: 1rem; font-size: 0.9rem; }
-      
-      /* Margen para el botón de música */
       .winamp-btn { margin: 15px auto 10px auto; }
     }
 
@@ -259,18 +193,62 @@
     .carousel-btn.next { right: 10px; }
     .carousel-btn:hover { background-color: #fff; }
 
-    /* ===== MODAL (FOTO GRANDE) ===== */
+    /* ===== ESTILOS SECCIÓN REGALOS (GIFT BOX) ===== */
+    .gift-card {
+        background-color: var(--color-principal);
+        color: white;
+        padding: 3rem 1.5rem;
+        border-radius: 1rem;
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto;
+        box-shadow: 0 10px 30px rgba(176, 138, 90, 0.3);
+    }
+    .gift-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+    .gift-text { font-size: 1rem; margin-bottom: 2rem; line-height: 1.8; }
+    .btn-white-outline {
+        display: inline-block; padding: 0.8rem 2rem; border: 2px solid white; color: white;
+        border-radius: 50px; text-transform: uppercase; font-weight: 600; font-size: 0.9rem;
+        cursor: pointer; transition: all 0.3s; background: transparent;
+    }
+    .btn-white-outline:hover { background: white; color: var(--color-principal); transform: translateY(-2px); }
+
+    /* ===== MODALS ===== */
     .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); align-items: center; justify-content: center; }
-    .modal-content { max-width: 85%; max-height: 85vh; border-radius: 5px; box-shadow: 0 0 20px rgba(255,255,255,0.1); }
+    
+    /* Modal de Fotos */
+    .modal-content-img { max-width: 85%; max-height: 85vh; border-radius: 5px; box-shadow: 0 0 20px rgba(255,255,255,0.1); }
+    
+    /* Modal de Datos Bancarios */
+    .modal-box {
+        background: white; padding: 2.5rem; border-radius: 15px; max-width: 90%; width: 400px;
+        text-align: center; position: relative; color: var(--color-texto);
+    }
+    
+    .bank-info { text-align: left; margin: 1.5rem 0; font-size: 0.95rem; background: #f9f9f9; padding: 1rem; border-radius: 10px; }
+    .bank-info p { margin-bottom: 0.5rem; word-break: break-all; }
+    
     .close-modal { position: absolute; top: 20px; right: 30px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 2002; transition: color 0.3s; }
-    .close-modal:hover { color: var(--color-principal); }
+    .close-modal-box { position: absolute; top: 10px; right: 15px; color: #888; font-size: 30px; font-weight: bold; cursor: pointer; }
+    
     .modal-prev, .modal-next { position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 3rem; font-weight: bold; cursor: pointer; z-index: 2002; padding: 1rem; user-select: none; transition: color 0.3s; }
     .modal-prev { left: 10px; }
     .modal-next { right: 10px; }
-    .modal-prev:hover, .modal-next:hover { color: var(--color-principal); }
     @media (max-width: 768px) { .modal-prev, .modal-next { font-size: 2rem; padding: 0.5rem; } }
 
     footer { text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: #888; background-color: rgba(0,0,0,0.02); margin-top: 2rem; }
+
+    /* ========================================= */
+    /* ===== MARCO DECORATIVO CSS (DOBLE LÍNEA) ===== */
+    body::before {
+        content: ""; position: fixed; top: 70px; left: 15px; right: 15px; bottom: 15px;
+        border: 1px solid var(--color-principal);
+        box-shadow: inset 0 0 0 6px var(--color-fondo), inset 0 0 0 7px var(--color-principal);
+        border-radius: 15px; pointer-events: none; z-index: 999;
+    }
+    @media (max-width: 768px) {
+        body::before { top: 70px; left: 8px; right: 8px; bottom: 8px; box-shadow: inset 0 0 0 4px var(--color-fondo), inset 0 0 0 5px var(--color-principal); border-radius: 10px; }
+    }
   </style>
 </head>
 
@@ -291,18 +269,12 @@
         <li><a href="#historia" class="nav-link" onclick="cerrarMenu()">Historia</a></li>
         <li><a href="#detalles" class="nav-link" onclick="cerrarMenu()">Detalles</a></li>
         <li><a href="#galeria" class="nav-link" onclick="cerrarMenu()">Galería</a></li>
-        <li><a href="#rsvp" class="nav-link" onclick="cerrarMenu()">RSVP</a></li>
-        
+        <li><a href="#regalos" class="nav-link" onclick="cerrarMenu()">Regalos</a></li>
         <li>
             <button class="winamp-btn" id="btnMusic" onclick="toggleMusic()" title="Música">
                 <span class="play-icon">▶</span>
-                
                 <div class="equalizer-container">
-                    <div class="wa-bar"></div>
-                    <div class="wa-bar"></div>
-                    <div class="wa-bar"></div>
-                    <div class="wa-bar"></div>
-                    <div class="wa-bar"></div>
+                    <div class="wa-bar"></div><div class="wa-bar"></div><div class="wa-bar"></div><div class="wa-bar"></div><div class="wa-bar"></div>
                 </div>
             </button>
         </li>
@@ -331,38 +303,32 @@
     <section id="detalles">
       <div class="section-title">Detalles</div>
       <div class="section-subtitle">Ceremonia & Fiesta</div>
-      
       <div class="grid grid-2">
         <div class="card">
-          <h3 class="card-title">Ceremonia</h3>
+          <h3 class="card-title">🏛️ Ceremonia</h3>
           <ul class="details-list">
-            <li>📅 <strong>11 de Abril de 2026</strong></li>
+            <li>📅 <strong>10 de Abril de 2026</strong></li>
             <li>⏰ <strong>18:00 hs</strong></li>
-            <li>📍 <strong>Iglesia</strong></li>
-            <li>⛪ <strong>Parroquia Ejemplo</strong></li>
+            <li>📍 <strong>Registro Civil Quilmes</strong></li>
           </ul>
-          <a href="https://www.google.com/maps/search/?api=1&query=Circulo+Medico+Quilmes+Av+Mitre+4625" target="_blank" class="btn-small">📍 Ver Ubicación</a>
+          <a href="https://maps.app.goo.gl/QrRVP4StAAgG7BFD8" target="_blank" class="btn-small">📍 Ver Ubicación</a>
         </div>
-
         <div class="card">
-          <h3 class="card-title">Fiesta</h3>
+          <h3 class="card-title">🥂 Fiesta</h3>
           <ul class="details-list">
             <li>📅 <strong>11 de Abril de 2026</strong></li>
             <li>🌙 <strong>20:00 hs</strong></li>
             <li>📍 <strong>Círculo Médico Quilmes</strong></li>
-            <li>🗺️ <strong>Av. Mitre 4625, Ezpeleta</strong></li>
           </ul>
           <a href="https://www.google.com/maps/search/?api=1&query=Circulo+Medico+Quilmes+Av+Mitre+4625" target="_blank" class="btn-small">📍 Ver Ubicación</a>
         </div>
       </div>
-      
       <div class="countdown" id="contador">Cargando...</div>
     </section>
 
     <section id="galeria">
       <div class="section-title">Recuerdos</div>
       <div class="section-subtitle">Nuestros momentos</div>
-      
       <div class="carousel-container">
         <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
         <div class="carousel-track" id="track">
@@ -383,16 +349,29 @@
       </div>
     </section>
 
+    <section id="regalos">
+        <div class="section-title">Regalos</div>
+        <div class="section-subtitle">Luna de Miel</div>
+        <div class="gift-card">
+            <div class="gift-icon">🎁</div>
+            <p class="gift-text">
+                Lo que más queremos es compartir con vos nuestro gran día, 
+                pero si quisieras ayudarnos con nuestra luna de miel, 
+                podés hacer clic en el siguiente botón.
+            </p>
+            <button class="btn-white-outline" onclick="openGiftModal()">
+                VER INFORMACIÓN
+            </button>
+        </div>
+    </section>
+
     <section id="rsvp">
       <div class="section-title">Confirmación</div>
       <div class="section-subtitle">¡Te esperamos!</div>
       <div style="text-align: center;">
-        <p>Por favor confirmá tu asistencia antes del <br><strong>4 de Abril de 2026</strong></p>
+        <p>Por favor confirmá tu asistencia antes del <br><strong>20 de  de 2026</strong></p>
       </div>
       <div class="rsvp-actions">
-        <a class="btn" href="https://wa.me/5491112345678?text=Hola!%20Confirmo%20mi%20asistencia%20a%20la%20boda" target="_blank">
-            Confirmar WhatsApp
-        </a>
         <a class="btn-secondary btn" href="mailto:invitacion@example.com">
             Enviar Email
         </a>
@@ -408,7 +387,35 @@
     <span class="close-modal" onclick="closeModal()">×</span>
     <a class="modal-prev" onclick="changeModalImage(-1)">❮</a>
     <a class="modal-next" onclick="changeModalImage(1)">❯</a>
-    <img class="modal-content" id="img01">
+    <img class="modal-content-img" id="img01">
+  </div>
+
+  <div id="giftModal" class="modal">
+    <div class="modal-box">
+        <span class="close-modal-box" onclick="closeGiftModal()">×</span>
+        <h3 style="color: var(--color-principal); margin-bottom: 1rem; font-family: 'Allura', cursive; font-size: 2.5rem;">Datos Bancarios</h3>
+        <p>Aquí tienes nuestros datos para la transferencia:</p>
+        
+        <div class="bank-info">
+            <p><strong>Banco:</strong> BBVA </p>
+            <p><strong>Titular:</strong> RIVAS ANDERSON ARNALDO DANIEL </p>
+            <p><strong>CBU:</strong> <span id="cbuNumber">0170109440000012181212</span></p>
+            <p><strong>Alias:</strong> NENEYDANI </p>
+            
+            <div style="border-top: 1px dashed #ccc; margin: 15px 0;"></div>
+            
+            <p style="margin-bottom: 5px;"><strong>Enviar comprobante:</strong></p>
+            
+            <a href="https://wa.me/5491158779553?text=Hola!%20Acá%20te%20envío%20el%20comprobante%20del%20regalo" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: #25D366; font-weight: 600; text-decoration: none; font-size: 1rem;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                +54 9 11 5877-9553 (Tocar aquí)
+            </a>
+        </div>
+
+        <button class="btn" onclick="copyCBU()">Copiar CBU</button>
+    </div>
   </div>
 
   <script>
@@ -419,7 +426,7 @@
     function cerrarMenu() { if(window.innerWidth <= 768) { menu.classList.remove("show"); } }
 
     // CONTADOR
-    const fechaBoda = new Date("2026-04-11T18:00:00"); 
+    const fechaBoda = new Date("2026-04-10T18:00:00"); 
     function actualizarContador() {
       const ahora = new Date();
       const diff = fechaBoda - ahora;
@@ -455,7 +462,7 @@
     carouselContainer.addEventListener('mouseleave', () => autoPlay = setInterval(() => moveSlide(1), 3000));
     window.addEventListener('resize', () => moveSlide(0));
 
-    // ===== LÓGICA DEL MODAL CON NAVEGACIÓN =====
+    // ===== MODAL FOTOS =====
     const modal = document.getElementById("myModal");
     const modalImg = document.getElementById("img01");
     const galleryImages = document.querySelectorAll('.carousel-item img');
@@ -472,17 +479,32 @@
             }
         }
     }
-
     function changeModalImage(n) {
         currentModalIndex += n;
         if (currentModalIndex >= galleryImages.length) currentModalIndex = 0;
         if (currentModalIndex < 0) currentModalIndex = galleryImages.length - 1;
         modalImg.src = galleryImages[currentModalIndex].src;
     }
-
     function closeModal() { modal.style.display = "none"; }
 
-    // MÚSICA
+    // ===== MODAL REGALOS (BANCO) =====
+    const giftModal = document.getElementById("giftModal");
+    function openGiftModal() { giftModal.style.display = "flex"; }
+    function closeGiftModal() { giftModal.style.display = "none"; }
+    
+    function copyCBU() {
+        const cbuText = document.getElementById("cbuNumber").innerText;
+        navigator.clipboard.writeText(cbuText).then(() => {
+            alert("¡CBU copiado al portapapeles!");
+        });
+    }
+
+    window.onclick = function(event) {
+        if (event.target == giftModal) closeGiftModal();
+        if (event.target == modal) closeModal();
+    }
+
+    // MÚSICA & AUTO-PLAY
     const audio = document.getElementById("musica");
     const musicBtn = document.getElementById("btnMusic");
     let isPlaying = false;
@@ -491,12 +513,34 @@
         if (isPlaying) {
             audio.pause();
             musicBtn.classList.remove("playing");
+            isPlaying = false;
         } else {
             audio.play();
             musicBtn.classList.add("playing");
+            isPlaying = true;
         }
-        isPlaying = !isPlaying;
     }
+
+    window.addEventListener("load", function() {
+        var promise = audio.play();
+        if (promise !== undefined) {
+            promise.then(_ => {
+                isPlaying = true;
+                musicBtn.classList.add("playing");
+            }).catch(error => {
+                console.log("Autoplay bloqueado. Esperando interacción...");
+                function unlockAudio() {
+                    audio.play();
+                    isPlaying = true;
+                    musicBtn.classList.add("playing");
+                    document.body.removeEventListener('click', unlockAudio);
+                    document.body.removeEventListener('touchstart', unlockAudio);
+                }
+                document.body.addEventListener('click', unlockAudio);
+                document.body.addEventListener('touchstart', unlockAudio);
+            });
+        }
+    });
   </script>
 
 </body>
