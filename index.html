@@ -21,13 +21,19 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* Personalización de la barra de scroll (Toque Premium) */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--color-fondo); }
+    ::-webkit-scrollbar-thumb { background: var(--color-principal); border-radius: 5px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--color-principal-dark); }
+
     html { scroll-padding-top: var(--nav-height); }
 
     body {
       font-family: "Montserrat", system-ui, sans-serif;
       background-color: var(--color-fondo);
       color: var(--color-texto);
-      line-height: 1.6;
+      line-height: 1.8; /* Un poco más de aire en el texto */
       scroll-behavior: smooth;
       overflow-x: hidden;
     }
@@ -50,16 +56,12 @@
         url("Fotos/Portada.jpeg"); 
       background-size: cover;
       background-repeat: no-repeat;
-      
-      /* --- LA SOLUCIÓN INICIO (Ajuste Foco Caras) --- */
       background-position: 50% 15%; 
-      
-      /* IMPORTANTE: z-index mayor que el marco decorativo (999) para taparlo */
       z-index: 1000; 
     }
 
     .hero-content { padding: 2rem; max-width: 800px; width: 100%; margin-top: 3rem; }
-    .text-shadow { text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+    .text-shadow { text-shadow: 0 4px 15px rgba(0,0,0,0.6); } /* Sombra un poco más difusa */
 
     .hero-subtitle {
       font-family: "Allura", cursive;
@@ -88,23 +90,24 @@
     nav.navbar {
       position: fixed; top: 0; width: 100%; height: var(--nav-height);
       background: rgba(247,244,239, 0.95);
-      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-      z-index: 1001; /* Mayor que hero y marco */
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      z-index: 1001;
+      border-bottom: 1px solid rgba(176, 138, 90, 0.1); /* Borde sutil dorado */
       display: flex; align-items: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
     }
     .nav-container {
       width: 100%; max-width: 960px; margin: 0 auto; padding: 0 1.5rem;
       display: flex; justify-content: space-between; align-items: center;
     }
-    .nav-logo { font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-secundario); }
+    .nav-logo { font-weight: 600; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-principal); }
     .nav-menu { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
-    .nav-link { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; padding: 0.5rem; font-weight: 500; color: var(--color-texto); }
+    .nav-link { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; padding: 0.5rem; font-weight: 600; color: var(--color-texto); }
     .nav-link:hover { color: var(--color-principal); }
     .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
-    .bar { height: 2px; width: 24px; background: var(--color-secundario); transition: all 0.3s ease; }
+    .bar { height: 2px; width: 24px; background: var(--color-principal); transition: all 0.3s ease; }
 
-    /* ===== ESTILO WINAMP "ELEGANTE" ===== */
+    /* Estilo Winamp */
     .winamp-btn {
         background: transparent;
         border: 1px solid var(--color-principal);
@@ -132,7 +135,7 @@
     .winamp-btn.playing .wa-bar:nth-child(5) { animation-duration: 0.3s; }
     @keyframes equalize { 0% { height: 15%; } 50% { height: 50%; } 100% { height: 90%; } }
 
-    /* RESPONSIVE NAVBAR (Móvil) CORREGIDO */
+    /* RESPONSIVE NAVBAR */
     @media (max-width: 768px) {
       .nav-toggle { display: flex; }
       .nav-menu {
@@ -149,106 +152,215 @@
 
     /* ===== MAIN CONTENT ===== */
     main { max-width: 960px; margin: 0 auto; padding: 4rem 1.2rem; }
-    section { margin-bottom: 4rem; }
-    .section-title { text-align: center; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem; color: var(--color-principal); margin-bottom: 0.5rem; font-weight: 600; }
-    .section-subtitle { text-align: center; font-family: "Allura", cursive; font-size: 2.5rem; margin-bottom: 2rem; color: var(--color-secundario); line-height: 1.2; }
-    .story { max-width: 700px; margin: 0 auto; text-align: center; font-size: 1.05rem; }
-    .story p + p { margin-top: 1.2rem; }
+    section { margin-bottom: 5rem; } /* Más separación entre secciones */
+    
+    .section-title { 
+        text-align: center; text-transform: uppercase; letter-spacing: 0.25em; 
+        font-size: 0.8rem; color: var(--color-principal); margin-bottom: 0.5rem; 
+        font-weight: 600; 
+    }
+    
+    .section-subtitle { 
+        text-align: center; font-family: "Allura", cursive; font-size: 3rem; 
+        margin-bottom: 2.5rem; color: var(--color-secundario); line-height: 1.2; 
+        position: relative;
+    }
+    
+    /* Línea decorativa debajo de los subtítulos */
+    .section-subtitle::after {
+        content: ""; display: block; width: 50px; height: 2px;
+        background-color: var(--color-principal); margin: 10px auto 0 auto;
+        opacity: 0.6;
+    }
 
-    /* GRID */
-    .grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+    .story { max-width: 700px; margin: 0 auto; text-align: center; font-size: 1.1rem; color: #555; }
+    .story p + p { margin-top: 1.5rem; }
+
+    /* GRID & CARDS - MEJORADAS */
+    .grid { display: grid; gap: 2rem; grid-template-columns: 1fr; }
     @media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
     
     .card {
-      background-color: var(--color-blanco); border-radius: 1rem; padding: 2rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: transform 0.3s;
+      background-color: var(--color-blanco); border-radius: 1rem; padding: 2.5rem 2rem;
+      /* Sombra dorada suave en lugar de negra */
+      box-shadow: 0 15px 40px rgba(176, 138, 90, 0.15); 
+      border: 1px solid rgba(176, 138, 90, 0.1);
+      text-align: center; transition: transform 0.3s, box-shadow 0.3s;
       display: flex; flex-direction: column; align-items: center;
     }
-    .card:hover { transform: translateY(-5px); }
-    .card-title { font-family: "Allura", cursive; font-size: 2rem; margin-bottom: 1rem; color: var(--color-principal); }
+    .card:hover { 
+        transform: translateY(-8px); 
+        box-shadow: 0 20px 50px rgba(176, 138, 90, 0.25);
+    }
+    .card-title { font-family: "Allura", cursive; font-size: 2.2rem; margin-bottom: 1rem; color: var(--color-principal); }
     .details-list { list-style: none; text-align: center; margin-bottom: 1.5rem; flex-grow: 1; }
-    .details-list li { margin-bottom: 0.8rem; font-size: 0.95rem; }
+    .details-list li { margin-bottom: 1rem; font-size: 1rem; color: #666; }
+    .details-list li strong { color: var(--color-secundario); }
 
     /* BOTONES */
-    .btn-small { display: inline-flex; align-items: center; gap: 5px; padding: 0.5rem 1.2rem; border: 1px solid var(--color-principal); border-radius: 20px; font-size: 0.75rem; text-transform: uppercase; font-weight: 600; color: var(--color-principal); transition: all 0.3s ease; }
-    .btn-small:hover { background-color: var(--color-principal); color: #fff; }
-    .btn { display: inline-flex; justify-content: center; align-items: center; min-width: 140px; padding: 0.9rem 2rem; background-color: var(--color-principal); color: var(--color-blanco); border-radius: 50px; text-transform: uppercase; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; transition: all 0.3s ease; cursor: pointer; }
-    .btn:hover { background-color: var(--color-principal-dark); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(176, 138, 90, 0.4); }
+    .btn-small { 
+        display: inline-flex; align-items: center; gap: 5px; padding: 0.6rem 1.4rem; 
+        border: 1px solid var(--color-principal); border-radius: 30px; 
+        font-size: 0.75rem; text-transform: uppercase; font-weight: 600; 
+        color: var(--color-principal); transition: all 0.3s ease; 
+    }
+    .btn-small:hover { background-color: var(--color-principal); color: #fff; box-shadow: 0 5px 15px rgba(176, 138, 90, 0.3); }
+
+    .btn { 
+        display: inline-flex; justify-content: center; align-items: center; 
+        min-width: 150px; padding: 1rem 2.5rem; 
+        background-color: var(--color-principal); color: var(--color-blanco); 
+        border-radius: 50px; text-transform: uppercase; font-size: 0.85rem; 
+        font-weight: 600; letter-spacing: 0.12em; transition: all 0.3s ease; cursor: pointer; 
+        border: none;
+    }
+    .btn:hover { 
+        background-color: var(--color-principal-dark); 
+        transform: translateY(-3px); 
+        box-shadow: 0 10px 25px rgba(176, 138, 90, 0.5); /* Glow effect */
+    }
+    
     .btn-secondary { background: transparent; border: 1px solid var(--color-principal); color: var(--color-principal); }
     .btn-secondary:hover { background: var(--color-principal); color: #fff; }
     
     .rsvp-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+
+    /* ===== ESTILOS DEL CONTADOR ===== */
+    .countdown-section {
+        margin: 4rem auto 0;
+        text-align: center;
+        width: 100%;
+        max-width: 600px;
+        background: #fff;
+        padding: 2.5rem 1rem;
+        border-radius: 15px;
+        /* Sombra suave */
+        box-shadow: 0 15px 40px rgba(176, 138, 90, 0.1);
+        border: 1px solid rgba(176, 138, 90, 0.1);
+    }
     
-    .countdown { margin: 2.5rem auto 0 auto; text-align: center; font-size: 1.1rem; font-weight: 500; color: var(--color-principal); background: #fff; padding: 1rem; border-radius: 10px; display: block; width: 100%; max-width: 400px; }
+    .countdown-cursive {
+        font-family: "Allura", cursive;
+        font-size: 3.5rem;
+        color: var(--color-principal);
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+    }
+
+    .countdown-text {
+        font-size: 0.85rem;
+        letter-spacing: 0.15em;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        color: #888;
+    }
+
+    .timer-box { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+
+    .time-item {
+        border: 1px solid var(--color-principal);
+        border-radius: 12px;
+        width: 85px;
+        height: 110px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #fff;
+        color: var(--color-principal);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+    }
+
+    .time-num {
+        font-family: "Montserrat", sans-serif;
+        font-size: 2.4rem;
+        font-weight: 500;
+        line-height: 1;
+        margin-bottom: 8px;
+    }
+
+    .time-label {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 500;
+        color: #999;
+    }
+
+    @media (max-width: 480px) {
+        .time-item { width: 70px; height: 90px; }
+        .time-num { font-size: 1.8rem; }
+        .time-label { font-size: 0.55rem; }
+        .countdown-cursive { font-size: 2.8rem; }
+    }
 
     /* ===== CARRUSEL ===== */
-    .carousel-container { position: relative; width: 100%; overflow: hidden; padding: 10px 0; }
-    .carousel-track { display: flex; transition: transform 0.5s ease-in-out; gap: 15px; }
-    .carousel-item { min-width: 100%; border-radius: 10px; overflow: hidden; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-    .carousel-item img { width: 100%; height: 350px; object-fit: cover; display: block; transition: transform 0.3s; }
-    .carousel-item:hover img { transform: scale(1.03); }
-    @media (min-width: 768px) { .carousel-item { min-width: calc(33.333% - 10px); } }
-    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(255, 255, 255, 0.7); border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 10; color: var(--color-principal); font-size: 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    .carousel-container { position: relative; width: 100%; overflow: hidden; padding: 20px 0; }
+    .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); gap: 20px; }
+    .carousel-item { min-width: 100%; border-radius: 12px; overflow: hidden; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .carousel-item img { width: 100%; height: 380px; object-fit: cover; display: block; transition: transform 0.5s; }
+    .carousel-item:hover img { transform: scale(1.05); }
+    @media (min-width: 768px) { .carousel-item { min-width: calc(33.333% - 14px); } }
+    
+    .carousel-btn { 
+        position: absolute; top: 50%; transform: translateY(-50%); 
+        background-color: #fff; border: 1px solid var(--color-principal);
+        width: 45px; height: 45px; border-radius: 50%; 
+        cursor: pointer; z-index: 10; color: var(--color-principal); 
+        font-size: 1.2rem; display: flex; align-items: center; justify-content: center; 
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: all 0.3s;
+    }
     .carousel-btn.prev { left: 10px; }
     .carousel-btn.next { right: 10px; }
-    .carousel-btn:hover { background-color: #fff; }
+    .carousel-btn:hover { background-color: var(--color-principal); color: #fff; }
 
-    /* ===== ESTILOS SECCIÓN REGALOS (GIFT BOX) ===== */
+    /* ===== REGALOS ===== */
     .gift-card {
-        background-color: var(--color-principal);
+        background: linear-gradient(135deg, var(--color-principal) 0%, var(--color-principal-dark) 100%);
         color: white;
-        padding: 3rem 1.5rem;
-        border-radius: 1rem;
+        padding: 4rem 2rem;
+        border-radius: 1.5rem;
         text-align: center;
         max-width: 600px;
         margin: 0 auto;
-        box-shadow: 0 10px 30px rgba(176, 138, 90, 0.3);
+        box-shadow: 0 20px 50px rgba(176, 138, 90, 0.4);
     }
-    .gift-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
-    .gift-text { font-size: 1rem; margin-bottom: 2rem; line-height: 1.8; }
+    .gift-icon { font-size: 3.5rem; margin-bottom: 1.5rem; display: block; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); }
+    .gift-text { font-size: 1.1rem; margin-bottom: 2.5rem; line-height: 1.8; opacity: 0.95; }
     .btn-white-outline {
-        display: inline-block; padding: 0.8rem 2rem; border: 2px solid white; color: white;
+        display: inline-block; padding: 1rem 2.5rem; border: 2px solid white; color: white;
         border-radius: 50px; text-transform: uppercase; font-weight: 600; font-size: 0.9rem;
-        cursor: pointer; transition: all 0.3s; background: transparent;
+        cursor: pointer; transition: all 0.3s; background: transparent; letter-spacing: 0.1em;
     }
-    .btn-white-outline:hover { background: white; color: var(--color-principal); transform: translateY(-2px); }
+    .btn-white-outline:hover { background: white; color: var(--color-principal); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 
     /* ===== MODALS ===== */
-    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); align-items: center; justify-content: center; }
+    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); align-items: center; justify-content: center; backdrop-filter: blur(5px); }
     
-    /* Modal de Fotos */
-    .modal-content-img { max-width: 85%; max-height: 85vh; border-radius: 5px; box-shadow: 0 0 20px rgba(255,255,255,0.1); }
+    .modal-content-img { max-width: 85%; max-height: 85vh; border-radius: 8px; box-shadow: 0 0 30px rgba(0,0,0,0.5); }
     
-    /* Modal de Datos Bancarios */
     .modal-box {
-        background: white; padding: 2.5rem; border-radius: 15px; max-width: 90%; width: 400px;
+        background: white; padding: 3rem; border-radius: 20px; max-width: 90%; width: 450px;
         text-align: center; position: relative; color: var(--color-texto);
+        box-shadow: 0 25px 60px rgba(0,0,0,0.2);
     }
     
-    .bank-info { text-align: left; margin: 1.5rem 0; font-size: 0.95rem; background: #f9f9f9; padding: 1rem; border-radius: 10px; }
-    .bank-info p { margin-bottom: 0.5rem; word-break: break-all; }
+    .bank-info { text-align: left; margin: 2rem 0; font-size: 1rem; background: #fcfbf9; padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); }
+    .bank-info p { margin-bottom: 0.8rem; word-break: break-all; }
     
     .close-modal { position: absolute; top: 20px; right: 30px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 2002; transition: color 0.3s; }
-    .close-modal-box { position: absolute; top: 10px; right: 15px; color: #888; font-size: 30px; font-weight: bold; cursor: pointer; }
+    .close-modal-box { position: absolute; top: 15px; right: 20px; color: #aaa; font-size: 30px; font-weight: bold; cursor: pointer; transition: color 0.3s; }
+    .close-modal-box:hover { color: var(--color-principal); }
     
-    .modal-prev, .modal-next { position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 3rem; font-weight: bold; cursor: pointer; z-index: 2002; padding: 1rem; user-select: none; transition: color 0.3s; }
-    .modal-prev { left: 10px; }
-    .modal-next { right: 10px; }
-    @media (max-width: 768px) { .modal-prev, .modal-next { font-size: 2rem; padding: 0.5rem; } }
+    .modal-prev, .modal-next { position: absolute; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.7); font-size: 3rem; font-weight: 300; cursor: pointer; z-index: 2002; padding: 1rem; user-select: none; transition: all 0.3s; }
+    .modal-prev:hover, .modal-next:hover { color: #fff; scale: 1.1; }
+    .modal-prev { left: 20px; }
+    .modal-next { right: 20px; }
 
-    footer { text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: #888; background-color: rgba(0,0,0,0.02); margin-top: 2rem; }
+    footer { text-align: center; padding: 3rem 1rem; font-size: 0.85rem; color: #999; background-color: #fcfbf9; margin-top: 4rem; border-top: 1px solid rgba(0,0,0,0.03); }
 
-    /* ========================================= */
-    /* ===== MARCO DECORATIVO CSS (DOBLE LÍNEA) ===== */
-    body::before {
-        content: ""; position: fixed; top: 70px; left: 15px; right: 15px; bottom: 15px;
-        border: 1px solid var(--color-principal);
-        box-shadow: inset 0 0 0 6px var(--color-fondo), inset 0 0 0 7px var(--color-principal);
-        border-radius: 15px; pointer-events: none; z-index: 999;
-    }
-    @media (max-width: 768px) {
-        body::before { top: 70px; left: 8px; right: 8px; bottom: 8px; box-shadow: inset 0 0 0 4px var(--color-fondo), inset 0 0 0 5px var(--color-principal); border-radius: 10px; }
-    }
+    /* EL MARCO DECORATIVO HA SIDO ELIMINADO */
   </style>
 </head>
 
@@ -267,8 +379,8 @@
       <ul class="nav-menu">
         <li><a href="#inicio" class="nav-link" onclick="cerrarMenu()">Inicio</a></li>
         <li><a href="#historia" class="nav-link" onclick="cerrarMenu()">Historia</a></li>
-        <li><a href="#detalles" class="nav-link" onclick="cerrarMenu()">Detalles</a></li>
         <li><a href="#galeria" class="nav-link" onclick="cerrarMenu()">Galería</a></li>
+        <li><a href="#detalles" class="nav-link" onclick="cerrarMenu()">Detalles</a></li>
         <li><a href="#regalos" class="nav-link" onclick="cerrarMenu()">Regalos</a></li>
         <li>
             <button class="winamp-btn" id="btnMusic" onclick="toggleMusic()" title="Música">
@@ -300,9 +412,32 @@
       </div>
     </section>
 
+    <section id="galeria">
+        <div class="section-title">Recuerdos</div>
+        <div class="section-subtitle">Nuestros momentos</div>
+        <div class="carousel-container">
+          <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
+          <div class="carousel-track" id="track">
+            <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (1).jpeg" alt="Foto"></div>
+            <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (2).jpeg" alt="Foto"></div>
+            <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (3).jpeg" alt="Foto"></div>
+            <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (4).jpeg" alt="Foto"></div>
+            <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (6).jpeg" alt="Foto"></div>
+            <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (7).jpeg" alt="Foto"></div>
+            <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (8).jpeg" alt="Foto"></div>
+            <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (9).jpeg" alt="Foto"></div>
+            <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (10).jpeg" alt="Foto"></div>
+            <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (11).jpeg" alt="Foto"></div>
+            <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (12).jpeg" alt="Foto"></div>
+          </div>
+          <button class="carousel-btn next" onclick="moveSlide(1)">❯</button>
+        </div>
+      </section>
+
     <section id="detalles">
       <div class="section-title">Detalles</div>
       <div class="section-subtitle">Ceremonia & Fiesta</div>
+    
       <div class="grid grid-2">
         <div class="card">
           <h3 class="card-title">🏛️ Ceremonia</h3>
@@ -323,29 +458,27 @@
           <a href="https://www.google.com/maps/search/?api=1&query=Circulo+Medico+Quilmes+Av+Mitre+4625" target="_blank" class="btn-small">📍 Ver Ubicación</a>
         </div>
       </div>
-      <div class="countdown" id="contador">Cargando...</div>
+
+    <div class="countdown-section">
+          <div class="countdown-cursive">¡Falta poco!</div>
+          <div class="countdown-text">VIERNES, 10 DE ABRIL - 18:00 HS</div>
+          
+          <div class="timer-box" id="contador">
+             Cargando...
+          </div>
+      </div>
     </section>
 
-    <section id="galeria">
-      <div class="section-title">Recuerdos</div>
-      <div class="section-subtitle">Nuestros momentos</div>
-      <div class="carousel-container">
-        <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
-        <div class="carousel-track" id="track">
-          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (1).jpeg" alt="Foto"></div>
-          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (2).jpeg" alt="Foto"></div>
-          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (3).jpeg" alt="Foto"></div>
-          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (4).jpeg" alt="Foto"></div>
-          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (5).jpeg" alt="Foto"></div>
-          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (6).jpeg" alt="Foto"></div>
-          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (7).jpeg" alt="Foto"></div>
-          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (8).jpeg" alt="Foto"></div>
-          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (9).jpeg" alt="Foto"></div>
-          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (10).jpeg" alt="Foto"></div>
-          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (11).jpeg" alt="Foto"></div>
-          <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (12).jpeg" alt="Foto"></div>
-        </div>
-        <button class="carousel-btn next" onclick="moveSlide(1)">❯</button>
+    <section id="rsvp">
+      <div class="section-title">Confirmación</div>
+      <div class="section-subtitle">¡Te esperamos!</div>
+      <div style="text-align: center;">
+        <p>Por favor confirmá tu asistencia antes del <br><strong>20 de Marzo de 2026</strong></p>
+      </div>
+      <div class="rsvp-actions">
+        <a class="btn-secondary btn" href="mailto:invitacion@example.com">
+            Enviar Email
+        </a>
       </div>
     </section>
 
@@ -365,18 +498,6 @@
         </div>
     </section>
 
-    <section id="rsvp">
-      <div class="section-title">Confirmación</div>
-      <div class="section-subtitle">¡Te esperamos!</div>
-      <div style="text-align: center;">
-        <p>Por favor confirmá tu asistencia antes del <br><strong>20 de Marzo de 2026</strong></p>
-      </div>
-      <div class="rsvp-actions">
-        <a class="btn-secondary btn" href="mailto:invitacion@example.com">
-            Enviar Email
-        </a>
-      </div>
-    </section>
   </main>
 
   <footer>
@@ -431,12 +552,35 @@
       const ahora = new Date();
       const diff = fechaBoda - ahora;
       const cont = document.getElementById("contador");
-      if (diff <= 0) { cont.textContent = "¡Hoy es el gran día! 💍"; return; }
+      
+      if (diff <= 0) { 
+          cont.innerHTML = "<div style='width:100%; font-size:1.5rem; color:var(--color-principal); font-family:Allura,cursive;'>¡Hoy es el gran día! 💍</div>"; 
+          return; 
+      }
+      
       const dias = Math.floor(diff / (1000*60*60*24));
       const hrs = Math.floor((diff / (1000*60*60)) % 24);
       const min = Math.floor((diff / (1000*60)) % 60);
       const seg = Math.floor((diff / 1000) % 60);
-      cont.innerHTML = `Faltan <strong>${dias}d ${hrs}h ${min}m ${seg}s</strong>`;
+      
+      cont.innerHTML = `
+        <div class="time-item">
+            <span class="time-num">${dias}</span>
+            <span class="time-label">Días</span>
+        </div>
+        <div class="time-item">
+            <span class="time-num">${hrs}</span>
+            <span class="time-label">Hs</span>
+        </div>
+        <div class="time-item">
+            <span class="time-num">${min}</span>
+            <span class="time-label">Min</span>
+        </div>
+        <div class="time-item">
+            <span class="time-num">${seg}</span>
+            <span class="time-label">Seg</span>
+        </div>
+      `;
     }
     actualizarContador(); setInterval(actualizarContador, 1000); 
 
@@ -487,7 +631,7 @@
     }
     function closeModal() { modal.style.display = "none"; }
 
-    // ===== MODAL REGALOS (BANCO) =====
+    // ===== MODAL REGALOS =====
     const giftModal = document.getElementById("giftModal");
     function openGiftModal() { giftModal.style.display = "flex"; }
     function closeGiftModal() { giftModal.style.display = "none"; }
@@ -504,7 +648,7 @@
         if (event.target == modal) closeModal();
     }
 
-    // MÚSICA & AUTO-PLAY
+    // MÚSICA
     const audio = document.getElementById("musica");
     const musicBtn = document.getElementById("btnMusic");
     let isPlaying = false;
@@ -528,7 +672,7 @@
                 isPlaying = true;
                 musicBtn.classList.add("playing");
             }).catch(error => {
-                console.log("Autoplay bloqueado. Esperando interacción...");
+                console.log("Autoplay bloqueado");
                 function unlockAudio() {
                     audio.play();
                     isPlaying = true;
