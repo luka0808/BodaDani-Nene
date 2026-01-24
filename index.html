@@ -101,7 +101,7 @@
       display: flex; justify-content: space-between; align-items: center;
     }
     .nav-logo { font-weight: 600; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-principal); }
-    .nav-menu { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+    .nav-menu { display: flex; gap: 1rem; list-style: none; align-items: center; }
     .nav-link { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; padding: 0.5rem; font-weight: 600; color: var(--color-texto); }
     .nav-link:hover { color: var(--color-principal); }
     .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
@@ -136,7 +136,7 @@
     @keyframes equalize { 0% { height: 15%; } 50% { height: 50%; } 100% { height: 90%; } }
 
     /* RESPONSIVE NAVBAR */
-    @media (max-width: 768px) {
+    @media (max-width: 850px) {
       .nav-toggle { display: flex; }
       .nav-menu {
         position: absolute; top: var(--nav-height); left: 0; width: 100%;
@@ -210,12 +210,13 @@
         background-color: var(--color-principal); color: var(--color-blanco); 
         border-radius: 50px; text-transform: uppercase; font-size: 0.85rem; 
         font-weight: 600; letter-spacing: 0.12em; transition: all 0.3s ease; cursor: pointer; 
-        border: none;
+        border: none; text-decoration: none;
     }
     .btn:hover { 
         background-color: var(--color-principal-dark); 
         transform: translateY(-3px); 
         box-shadow: 0 10px 25px rgba(176, 138, 90, 0.5);
+        color: #fff;
     }
     
     .btn-secondary { background: transparent; border: 1px solid var(--color-principal); color: var(--color-principal); }
@@ -329,6 +330,7 @@
         display: inline-block; padding: 1rem 2.5rem; border: 2px solid white; color: white;
         border-radius: 50px; text-transform: uppercase; font-weight: 600; font-size: 0.9rem;
         cursor: pointer; transition: all 0.3s; background: transparent; letter-spacing: 0.1em;
+        text-decoration: none;
     }
     .btn-white-outline:hover { background: white; color: var(--color-principal); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 
@@ -377,6 +379,7 @@
         <li><a href="#galeria" class="nav-link" onclick="cerrarMenu()">Galería</a></li>
         <li><a href="#detalles" class="nav-link" onclick="cerrarMenu()">Detalles</a></li>
         <li><a href="#regalos" class="nav-link" onclick="cerrarMenu()">Regalos</a></li>
+        <li><a href="#album" class="nav-link" onclick="cerrarMenu()">Álbum</a></li>
         <li>
             <button class="winamp-btn" id="btnMusic" onclick="toggleMusic()" title="Música">
                 <span class="play-icon">▶</span>
@@ -417,6 +420,7 @@
             <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (2).jpeg" alt="Foto"></div>
             <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (3).jpeg" alt="Foto"></div>
             <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (4).jpeg" alt="Foto"></div>
+
             <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (6).jpeg" alt="Foto"></div>
             <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (7).jpeg" alt="Foto"></div>
             <div class="carousel-item" onclick="openModal(this)"><img src="Fotos/Fotos Carrusel (8).jpeg" alt="Foto"></div>
@@ -493,6 +497,22 @@
         </div>
     </section>
 
+    <section id="album">
+        <div class="section-title">Galería Extendida</div>
+        <div class="section-subtitle">Recuerdos de nuestro día</div>
+        
+        <div class="card" style="max-width: 800px; margin: 0 auto; text-align: center;">
+             <div style="font-size: 3.5rem; margin-bottom: 1rem; color: var(--color-principal);">📸</div>
+             <h3 class="card-title" style="font-size: 1.8rem; margin-bottom: 1.5rem;">Fotos del Civil & Boda</h3>
+             <p style="margin-bottom: 2rem; font-size: 1.1rem; color: #666; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Queremos que revivas cada instante con nosotros. En este enlace encontrarás todas las fotos oficiales de nuestra boda y el civil. ¡Gracias por ser parte de nuestra historia!
+             </p>
+             <a href="#" target="_blank" class="btn">
+                📂 Ver Fotos en Drive
+             </a>
+        </div>
+    </section>
+
   </main>
 
   <footer>
@@ -539,7 +559,7 @@
     const toggle = document.getElementById("mobile-menu");
     const menu = document.querySelector(".nav-menu");
     toggle.addEventListener("click", () => { menu.classList.toggle("show"); });
-    function cerrarMenu() { if(window.innerWidth <= 768) { menu.classList.remove("show"); } }
+    function cerrarMenu() { if(window.innerWidth <= 850) { menu.classList.remove("show"); } }
 
     // CONTADOR
     const fechaBoda = new Date("2026-04-10T18:00:00"); 
